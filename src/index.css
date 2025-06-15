@@ -85,15 +85,6 @@
     --sidebar-border: 51 65 85;
     --sidebar-ring: 59 130 246;
   }
-
-  /* Blue light filter variants */
-  .blue-light-filter {
-    filter: sepia(20%) saturate(80%) hue-rotate(180deg) brightness(95%);
-  }
-
-  .blue-light-filter.dark {
-    filter: sepia(25%) saturate(70%) hue-rotate(180deg) brightness(85%) contrast(110%);
-  }
 }
 
 @layer base {
@@ -107,12 +98,13 @@
     transition: background-color 0.3s ease, color 0.3s ease, filter 0.3s ease;
   }
 
+  /* Blue light filter styles applied directly to body */
   body.blue-light-filter {
-    @apply blue-light-filter;
+    filter: sepia(20%) saturate(80%) hue-rotate(180deg) brightness(95%);
   }
 
   body.blue-light-filter.dark {
-    @apply blue-light-filter;
+    filter: sepia(25%) saturate(70%) hue-rotate(180deg) brightness(85%) contrast(110%);
   }
 }
 
