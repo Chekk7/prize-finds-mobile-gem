@@ -8,7 +8,7 @@
 @layer base {
   :root {
     --background: 45 38 28;
-    --foreground: 62 39 35;
+    --foreground: 245 240 230;
 
     --card: 50 43 33;
     --card-foreground: 245 240 230;
@@ -75,20 +75,31 @@
   }
 
   html {
-    @apply bg-background;
-    background-color: hsl(var(--background)) !important;
+    background-color: hsl(45 38 28) !important;
+  }
+
+  html.dark {
+    background-color: hsl(30 25 18) !important;
   }
 
   body {
-    @apply bg-background text-foreground;
-    background-color: hsl(var(--background)) !important;
+    @apply text-foreground;
+    background-color: hsl(45 38 28) !important;
     font-feature-settings: "rlig" 1, "calt" 1;
     transition: background-color 0.3s ease, color 0.3s ease, filter 0.3s ease;
   }
 
+  body.dark {
+    background-color: hsl(30 25 18) !important;
+  }
+
   #root {
-    @apply bg-background min-h-screen;
-    background-color: hsl(var(--background)) !important;
+    @apply min-h-screen;
+    background-color: hsl(45 38 28) !important;
+  }
+
+  #root.dark {
+    background-color: hsl(30 25 18) !important;
   }
 
   /* Blue light filter styles applied directly to body */
@@ -107,11 +118,11 @@
 }
 
 .gradient-card {
-  background: linear-gradient(135deg, rgb(50 43 33) 0%, rgb(60 50 40) 100%);
+  background: linear-gradient(135deg, hsl(50 43 33) 0%, hsl(60 50 40) 100%);
 }
 
 .dark .gradient-card {
-  background: linear-gradient(135deg, rgb(40 32 22) 0%, rgb(50 40 28) 100%);
+  background: linear-gradient(135deg, hsl(40 32 22) 0%, hsl(50 40 28) 100%);
 }
 
 /* Mobile-first touch targets */

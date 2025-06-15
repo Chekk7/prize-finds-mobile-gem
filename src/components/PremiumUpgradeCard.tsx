@@ -1,5 +1,6 @@
 
 import { Crown, Zap, BookOpen, Camera } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useAuth } from '@/context/AuthContext';
@@ -10,7 +11,7 @@ const PremiumUpgradeCard = () => {
   if (!user || user.isPremium) return null;
 
   return (
-    <Card className="bg-gradient-to-r from-brand-gold-400 to-brand-gold-600 text-white border-0 shadow-lg">
+    <Card className="bg-gradient-to-r from-amber-400 to-amber-600 text-white border-0 shadow-lg">
       <CardHeader>
         <CardTitle className="flex items-center space-x-2">
           <Crown className="w-6 h-6" />
@@ -36,12 +37,14 @@ const PremiumUpgradeCard = () => {
             <span>Detailed value analysis</span>
           </div>
         </div>
-        <Button 
-          className="w-full bg-white text-brand-gold-600 hover:bg-gray-100"
-          size="lg"
-        >
-          Upgrade Now - $9.99/month
-        </Button>
+        <Link to="/account">
+          <Button 
+            className="w-full bg-white text-amber-600 hover:bg-gray-100"
+            size="lg"
+          >
+            Upgrade Now - $9.99/month
+          </Button>
+        </Link>
       </CardContent>
     </Card>
   );

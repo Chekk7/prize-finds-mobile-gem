@@ -1,5 +1,6 @@
 
 import { Crown, Camera } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
@@ -18,11 +19,11 @@ const ScanUsageCard = () => {
       <CardHeader>
         <CardTitle className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <Camera className="w-5 h-5 text-brand-blue-600" />
+            <Camera className="w-5 h-5 text-primary" />
             <span>Daily Scans</span>
           </div>
           {user.isPremium && (
-            <div className="flex items-center space-x-1 text-brand-gold-600">
+            <div className="flex items-center space-x-1 text-accent">
               <Crown size={16} />
               <span className="text-sm font-medium">Unlimited</span>
             </div>
@@ -38,30 +39,29 @@ const ScanUsageCard = () => {
             </div>
             <Progress value={usagePercentage} className="w-full" />
             {!canScan && (
-              <div className="text-center text-sm text-red-600">
+              <div className="text-center text-sm text-destructive">
                 Daily limit reached. Upgrade for unlimited scans!
               </div>
             )}
           </>
         ) : (
           <div className="text-center">
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-muted-foreground">
               You have unlimited scans with Premium
             </p>
-            <p className="text-lg font-semibold text-brand-gold-600">
+            <p className="text-lg font-semibold text-accent">
               {user.scansToday} scans today
             </p>
           </div>
         )}
         
         {!user.isPremium && (
-          <Button 
-            className="w-full gradient-brand text-white"
-            size="sm"
-          >
-            <Crown className="w-4 h-4 mr-2" />
-            Upgrade to Premium
-          </Button>
+          <Link to="/account">
+            <Button className="w-full gradient-brand text-white" size="sm">
+              <Crown className="w-4 h-4 mr-2" />
+              Upgrade to Premium
+            </Button>
+          </Link>
         )}
       </CardContent>
     </Card>

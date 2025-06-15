@@ -2,6 +2,7 @@
 import { BookOpen, Crown } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import ScanUsageCard from '@/components/ScanUsageCard';
 
 const DashboardSidebar = () => {
@@ -15,19 +16,23 @@ const DashboardSidebar = () => {
           <CardTitle className="text-lg">Quick Links</CardTitle>
         </CardHeader>
         <CardContent className="space-y-3">
-          <Link 
-            to="/guides" 
-            className="flex items-center space-x-3 p-3 rounded-lg hover:bg-muted transition-colors"
-          >
-            <BookOpen className="w-5 h-5 text-brand-blue-600" />
-            <span>Error Detection Guides</span>
+          <Link to="/guides">
+            <Button
+              variant="ghost"
+              className="w-full justify-start space-x-3 p-3 h-auto"
+            >
+              <BookOpen className="w-5 h-5 text-primary" />
+              <span>Error Detection Guides</span>
+            </Button>
           </Link>
-          <Link 
-            to="/account" 
-            className="flex items-center space-x-3 p-3 rounded-lg hover:bg-muted transition-colors"
-          >
-            <Crown className="w-5 h-5 text-brand-gold-600" />
-            <span>Account Settings</span>
+          <Link to="/account">
+            <Button
+              variant="ghost"
+              className="w-full justify-start space-x-3 p-3 h-auto"
+            >
+              <Crown className="w-5 h-5 text-accent" />
+              <span>Account Settings</span>
+            </Button>
           </Link>
         </CardContent>
       </Card>

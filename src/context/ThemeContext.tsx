@@ -12,33 +12,35 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [isDarkMode, setIsDarkMode] = useState(() => {
-    // Initialize immediately from localStorage
     return localStorage.getItem('theme') === 'dark';
   });
   const [isBlueFilterEnabled, setIsBlueFilterEnabled] = useState(() => {
-    // Initialize immediately from localStorage
     return localStorage.getItem('blue-filter') === 'true';
   });
 
-  // Apply theme immediately on mount and state changes
   useEffect(() => {
     const html = document.documentElement;
     const body = document.body;
+    const root = document.getElementById('root');
     
     console.log('Applying theme changes:', { isDarkMode, isBlueFilterEnabled });
     
-    // Apply dark mode class to html element (this is what Tailwind CSS expects)
+    // Apply dark mode class and background
     if (isDarkMode) {
       html.classList.add('dark');
+      body.classList.add('dark');
+      if (root) root.classList.add('dark');
       localStorage.setItem('theme', 'dark');
       console.log('Dark mode enabled');
     } else {
       html.classList.remove('dark');
+      body.classList.remove('dark');
+      if (root) root.classList.remove('dark');
       localStorage.setItem('theme', 'light');
       console.log('Light mode enabled');
     }
 
-    // Apply blue light filter to body element
+    // Apply blue light filter
     if (isBlueFilterEnabled) {
       body.classList.add('blue-light-filter');
       localStorage.setItem('blue-filter', 'true');
@@ -48,10 +50,6 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       localStorage.setItem('blue-filter', 'false');
       console.log('Blue light filter disabled');
     }
-
-    // Force background color application
-    html.style.backgroundColor = `hsl(var(--background))`;
-    body.style.backgroundColor = `hsl(var(--background))`;
   }, [isDarkMode, isBlueFilterEnabled]);
 
   const toggleDarkMode = () => {
