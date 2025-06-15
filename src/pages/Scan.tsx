@@ -6,13 +6,27 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import Header from '@/components/Header';
 import MobileNavigation from '@/components/MobileNavigation';
 import { useAuth } from '@/context/AuthContext';
+import { useScannedImages } from '@/context/ScannedImagesContext';
+import { useToast } from '@/hooks/use-toast';
 
 const Scan = () => {
   const { user } = useAuth();
+  const { addScannedImage } = useScannedImages();
+  const { toast } = useToast();
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [isScanning, setIsScanning] = useState(false);
 
   const canScan = user && (user.isPremium || user.scansToday < user.maxDailyScans);
+
+  // Mock error detection results
+  const mockErrorTypes = [
+    { type: "Common Coin Error", guideId: 1 },
+    { type: "Double Die Error", guideId: 2 },
+    { type: "Currency Misalignment", guideId: 3 },
+    { type: "Serial Number Anomaly", guideId: 4 },
+    { type: "Off-Center Strike", guideId: 5 },
+    { type: "Ink Smear", guideId: 6 }
+  ];
 
   const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -26,16 +40,23 @@ const Scan = () => {
 
     setIsScanning(true);
     
-    // TODO: Integrate with AI scanning API
-    // const formData = new FormData();
-    // formData.append('image', selectedFile);
-    // const response = await fetch('/api/scan', { method: 'POST', body: formData });
-    
     // Simulate scanning delay
     setTimeout(() => {
+      // Mock error detection - randomly select an error type
+      const randomError = mockErrorTypes[Math.floor(Math.random() * mockErrorTypes.length)];
+      
+      // Save the scanned image with the detected error
+      addScannedImage(selectedFile, randomError.type, randomError.guideId);
+      
       setIsScanning(false);
-      // TODO: Handle scan results and navigation
-      console.log('Scan completed - TODO: Integrate with AI API');
+      setSelectedFile(null);
+      
+      toast({
+        title: "Scan Complete!",
+        description: `Detected: ${randomError.type}. Check the Guides page to see your image!`,
+      });
+      
+      console.log('Scan completed - Error detected:', randomError.type);
     }, 3000);
   };
 
@@ -87,7 +108,7 @@ const Scan = () => {
                     <span className="font-medium">Daily limit reached</span>
                   </div>
                   <p className="text-sm text-red-600 mt-1">
-                    You've used all {user.maxDailyScans} daily scans. Upgrade to Premium for unlimited scans.
+                    You've used all {user?.maxDailyScans} daily scans. Upgrade to Premium for unlimited scans.
                   </p>
                 </div>
               )}

@@ -6,9 +6,11 @@ import { Button } from '@/components/ui/button';
 import Header from '@/components/Header';
 import MobileNavigation from '@/components/MobileNavigation';
 import { useToast } from '@/hooks/use-toast';
+import { useScannedImages } from '@/context/ScannedImagesContext';
 
 const Guides = () => {
   const { toast } = useToast();
+  const { getImageForGuide } = useScannedImages();
 
   const guides = [
     {
@@ -18,7 +20,7 @@ const Guides = () => {
       category: "Coins",
       difficulty: "Beginner",
       estimatedValue: "$10-500",
-      image: "https://images.unsplash.com/photo-1574607383476-f517f260d30b?w=300&h=200&fit=crop&q=80"
+      defaultImage: "https://images.unsplash.com/photo-1574607383476-f517f260d30b?w=300&h=200&fit=crop&q=80"
     },
     {
       id: 2,
@@ -27,7 +29,7 @@ const Guides = () => {
       category: "Coins",
       difficulty: "Intermediate",
       estimatedValue: "$50-2000",
-      image: "https://images.unsplash.com/photo-1589992693383-c4d57e938168?w=300&h=200&fit=crop&q=80"
+      defaultImage: "https://images.unsplash.com/photo-1589992693383-c4d57e938168?w=300&h=200&fit=crop&q=80"
     },
     {
       id: 3,
@@ -36,7 +38,7 @@ const Guides = () => {
       category: "Currency",
       difficulty: "Beginner",
       estimatedValue: "$25-300",
-      image: "https://images.unsplash.com/photo-1614028674026-a65e814c1334?w=300&h=200&fit=crop&q=80"
+      defaultImage: "https://images.unsplash.com/photo-1614028674026-a65e814c1334?w=300&h=200&fit=crop&q=80"
     },
     {
       id: 4,
@@ -45,7 +47,7 @@ const Guides = () => {
       category: "Currency",
       difficulty: "Advanced",
       estimatedValue: "$100-5000",
-      image: "https://images.unsplash.com/photo-1580519542036-c47de6196ba5?w=300&h=200&fit=crop&q=80"
+      defaultImage: "https://images.unsplash.com/photo-1580519542036-c47de6196ba5?w=300&h=200&fit=crop&q=80"
     },
     {
       id: 5,
@@ -54,7 +56,7 @@ const Guides = () => {
       category: "Coins",
       difficulty: "Intermediate",
       estimatedValue: "$15-800",
-      image: "https://images.unsplash.com/photo-1544378730-6edb7b5a1cd3?w=300&h=200&fit=crop&q=80"
+      defaultImage: "https://images.unsplash.com/photo-1544378730-6edb7b5a1cd3?w=300&h=200&fit=crop&q=80"
     },
     {
       id: 6,
@@ -63,7 +65,7 @@ const Guides = () => {
       category: "Currency",
       difficulty: "Beginner",
       estimatedValue: "$20-150",
-      image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=300&h=200&fit=crop&q=80"
+      defaultImage: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=300&h=200&fit=crop&q=80"
     }
   ];
 
@@ -123,46 +125,57 @@ const Guides = () => {
 
         {/* Guides Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {guides.map((guide) => (
-            <Card 
-              key={guide.id} 
-              className="group cursor-pointer hover:shadow-xl transition-all duration-200 hover:scale-105"
-              onClick={() => handleGuideClick(guide)}
-            >
-              <div className="aspect-video overflow-hidden rounded-t-lg">
-                <img 
-                  src={guide.image} 
-                  alt={guide.title}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-200"
-                />
-              </div>
-              <CardHeader className="pb-2">
-                <div className="flex items-center justify-between mb-2">
-                  <Badge className={getCategoryColor(guide.category)}>
-                    {guide.category}
-                  </Badge>
-                  <Badge className={getDifficultyColor(guide.difficulty)}>
-                    {guide.difficulty}
-                  </Badge>
+          {guides.map((guide) => {
+            const scannedImage = getImageForGuide(guide.id);
+            const imageToUse = scannedImage ? scannedImage.url : guide.defaultImage;
+            const isScannedImage = !!scannedImage;
+
+            return (
+              <Card 
+                key={guide.id} 
+                className="group cursor-pointer hover:shadow-xl transition-all duration-200 hover:scale-105"
+                onClick={() => handleGuideClick(guide)}
+              >
+                <div className="aspect-video overflow-hidden rounded-t-lg relative">
+                  <img 
+                    src={imageToUse} 
+                    alt={guide.title}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-200"
+                  />
+                  {isScannedImage && (
+                    <div className="absolute top-2 right-2">
+                      <Badge className="bg-green-500 text-white">Your Scan</Badge>
+                    </div>
+                  )}
                 </div>
-                <CardTitle className="text-lg leading-tight">{guide.title}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-600 text-sm mb-4">{guide.description}</p>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-1 text-green-600">
-                    <DollarSign size={16} />
-                    <span className="text-sm font-medium">{guide.estimatedValue}</span>
+                <CardHeader className="pb-2">
+                  <div className="flex items-center justify-between mb-2">
+                    <Badge className={getCategoryColor(guide.category)}>
+                      {guide.category}
+                    </Badge>
+                    <Badge className={getDifficultyColor(guide.difficulty)}>
+                      {guide.difficulty}
+                    </Badge>
                   </div>
-                  <div className="flex items-center space-x-1 text-brand-blue-600 group-hover:text-brand-blue-700">
-                    <BookOpen size={16} />
-                    <span className="text-sm">Read Guide</span>
-                    <ExternalLink size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <CardTitle className="text-lg leading-tight">{guide.title}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600 text-sm mb-4">{guide.description}</p>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-1 text-green-600">
+                      <DollarSign size={16} />
+                      <span className="text-sm font-medium">{guide.estimatedValue}</span>
+                    </div>
+                    <div className="flex items-center space-x-1 text-brand-blue-600 group-hover:text-brand-blue-700">
+                      <BookOpen size={16} />
+                      <span className="text-sm">Read Guide</span>
+                      <ExternalLink size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />
+                    </div>
                   </div>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
+                </CardContent>
+              </Card>
+            );
+          })}
         </div>
 
         {/* Coming Soon Section */}
