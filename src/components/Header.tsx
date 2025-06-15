@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Menu, X, Crown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/context/AuthContext';
+import ThemeControls from '@/components/ThemeControls';
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -23,7 +24,7 @@ const Header = () => {
   ];
 
   return (
-    <header className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-40">
+    <header className="bg-card shadow-sm border-b border-border sticky top-0 z-40 backdrop-blur-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
@@ -31,7 +32,7 @@ const Header = () => {
             <div className="w-8 h-8 bg-gradient-to-br from-brand-blue-600 to-brand-gold-500 rounded-lg flex items-center justify-center">
               <Crown className="w-5 h-5 text-white" />
             </div>
-            <span className="text-xl font-bold text-gray-900">Prize Finds</span>
+            <span className="text-xl font-bold text-foreground">Prize Finds</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -40,15 +41,16 @@ const Header = () => {
               <Link
                 key={path}
                 to={path}
-                className="text-gray-600 hover:text-brand-blue-600 transition-colors"
+                className="text-muted-foreground hover:text-primary transition-colors"
               >
                 {label}
               </Link>
             ))}
           </nav>
 
-          {/* Desktop Auth Actions */}
+          {/* Desktop Actions - Theme Controls + Auth */}
           <div className="hidden md:flex items-center space-x-4">
+            <ThemeControls />
             {user ? (
               <div className="flex items-center space-x-4">
                 {user.isPremium && (
@@ -57,7 +59,7 @@ const Header = () => {
                     <span className="text-sm font-medium">Premium</span>
                   </div>
                 )}
-                <span className="text-sm text-gray-600">
+                <span className="text-sm text-muted-foreground">
                   Hi, {user.username || user.email}
                 </span>
                 <Button
@@ -85,23 +87,26 @@ const Header = () => {
           </div>
 
           {/* Mobile Menu Button */}
-          <button
-            className="md:hidden touch-target"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          <div className="md:hidden flex items-center space-x-2">
+            <ThemeControls />
+            <button
+              className="touch-target"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            >
+              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden py-4 border-t border-gray-200">
+          <div className="md:hidden py-4 border-t border-border">
             <nav className="flex flex-col space-y-4">
               {navItems.map(({ path, label }) => (
                 <Link
                   key={path}
                   to={path}
-                  className="text-gray-600 hover:text-brand-blue-600 transition-colors py-2"
+                  className="text-muted-foreground hover:text-primary transition-colors py-2"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {label}
@@ -109,11 +114,11 @@ const Header = () => {
               ))}
               
               {/* Mobile Auth Actions */}
-              <div className="pt-4 border-t border-gray-200">
+              <div className="pt-4 border-t border-border">
                 {user ? (
                   <div className="space-y-2">
                     <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-600">
+                      <span className="text-sm text-muted-foreground">
                         Hi, {user.username || user.email}
                       </span>
                       {user.isPremium && (
