@@ -74,19 +74,21 @@
     @apply border-border;
   }
 
+  html {
+    @apply bg-background;
+    background-color: hsl(var(--background)) !important;
+  }
+
   body {
     @apply bg-background text-foreground;
+    background-color: hsl(var(--background)) !important;
     font-feature-settings: "rlig" 1, "calt" 1;
     transition: background-color 0.3s ease, color 0.3s ease, filter 0.3s ease;
   }
 
-  /* Ensure html and root also get the background */
-  html {
-    @apply bg-background;
-  }
-
   #root {
     @apply bg-background min-h-screen;
+    background-color: hsl(var(--background)) !important;
   }
 
   /* Blue light filter styles applied directly to body */

@@ -11,23 +11,16 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-  const [isBlueFilterEnabled, setIsBlueFilterEnabled] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    // Initialize immediately from localStorage
+    return localStorage.getItem('theme') === 'dark';
+  });
+  const [isBlueFilterEnabled, setIsBlueFilterEnabled] = useState(() => {
+    // Initialize immediately from localStorage
+    return localStorage.getItem('blue-filter') === 'true';
+  });
 
-  useEffect(() => {
-    // Check for saved theme preference or default to light mode
-    const savedTheme = localStorage.getItem('theme');
-    const savedBlueFilter = localStorage.getItem('blue-filter') === 'true';
-    
-    console.log('Initializing theme:', { savedTheme, savedBlueFilter });
-    
-    if (savedTheme === 'dark') {
-      setIsDarkMode(true);
-    }
-    
-    setIsBlueFilterEnabled(savedBlueFilter);
-  }, []);
-
+  // Apply theme immediately on mount and state changes
   useEffect(() => {
     const html = document.documentElement;
     const body = document.body;
@@ -55,6 +48,10 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       localStorage.setItem('blue-filter', 'false');
       console.log('Blue light filter disabled');
     }
+
+    // Force background color application
+    html.style.backgroundColor = `hsl(var(--background))`;
+    body.style.backgroundColor = `hsl(var(--background))`;
   }, [isDarkMode, isBlueFilterEnabled]);
 
   const toggleDarkMode = () => {
