@@ -19,6 +19,8 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     const savedTheme = localStorage.getItem('theme');
     const savedBlueFilter = localStorage.getItem('blue-filter') === 'true';
     
+    console.log('Initializing theme:', { savedTheme, savedBlueFilter });
+    
     if (savedTheme === 'dark') {
       setIsDarkMode(true);
     }
@@ -30,28 +32,36 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     const root = document.documentElement;
     const body = document.body;
     
+    console.log('Applying theme changes:', { isDarkMode, isBlueFilterEnabled });
+    
     if (isDarkMode) {
       root.classList.add('dark');
       localStorage.setItem('theme', 'dark');
+      console.log('Dark mode enabled');
     } else {
       root.classList.remove('dark');
       localStorage.setItem('theme', 'light');
+      console.log('Light mode enabled');
     }
 
     if (isBlueFilterEnabled) {
       body.classList.add('blue-light-filter');
       localStorage.setItem('blue-filter', 'true');
+      console.log('Blue light filter enabled');
     } else {
       body.classList.remove('blue-light-filter');
       localStorage.setItem('blue-filter', 'false');
+      console.log('Blue light filter disabled');
     }
   }, [isDarkMode, isBlueFilterEnabled]);
 
   const toggleDarkMode = () => {
+    console.log('Toggling dark mode from:', isDarkMode, 'to:', !isDarkMode);
     setIsDarkMode(!isDarkMode);
   };
 
   const toggleBlueFilter = () => {
+    console.log('Toggling blue filter from:', isBlueFilterEnabled, 'to:', !isBlueFilterEnabled);
     setIsBlueFilterEnabled(!isBlueFilterEnabled);
   };
 
