@@ -14,7 +14,7 @@ const Index = () => {
 
   if (!user) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
+      <div className="min-h-screen bg-gradient-to-br from-background to-accent/10 dark:from-background dark:to-accent/5">
         <Header />
         
         {/* Hero Section */}
@@ -101,7 +101,7 @@ const Index = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 pb-20 md:pb-8">
+    <div className="min-h-screen bg-gradient-to-br from-background to-accent/10 dark:from-background dark:to-accent/5 pb-20 md:pb-8">
       <Header />
       
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
