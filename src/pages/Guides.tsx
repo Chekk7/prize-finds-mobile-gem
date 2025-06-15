@@ -18,7 +18,7 @@ const Guides = () => {
       category: "Coins",
       difficulty: "Beginner",
       estimatedValue: "$10-500",
-      image: "https://images.unsplash.com/photo-1621416894569-0f39ed31d247?w=300&h=200&fit=crop&q=80"
+      image: "https://images.unsplash.com/photo-1574607383476-f517f260d30b?w=300&h=200&fit=crop&q=80"
     },
     {
       id: 2,
@@ -27,7 +27,7 @@ const Guides = () => {
       category: "Coins",
       difficulty: "Intermediate",
       estimatedValue: "$50-2000",
-      image: "https://images.unsplash.com/photo-1640826387934-6d1369d93ccd?w=300&h=200&fit=crop&q=80"
+      image: "https://images.unsplash.com/photo-1589992693383-c4d57e938168?w=300&h=200&fit=crop&q=80"
     },
     {
       id: 3,
@@ -36,7 +36,7 @@ const Guides = () => {
       category: "Currency",
       difficulty: "Beginner",
       estimatedValue: "$25-300",
-      image: "https://images.unsplash.com/photo-1633158829585-23ba8f7c8caf?w=300&h=200&fit=crop&q=80"
+      image: "https://images.unsplash.com/photo-1614028674026-a65e814c1334?w=300&h=200&fit=crop&q=80"
     },
     {
       id: 4,
@@ -45,7 +45,7 @@ const Guides = () => {
       category: "Currency",
       difficulty: "Advanced",
       estimatedValue: "$100-5000",
-      image: "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=300&h=200&fit=crop&q=80"
+      image: "https://images.unsplash.com/photo-1580519542036-c47de6196ba5?w=300&h=200&fit=crop&q=80"
     },
     {
       id: 5,
@@ -54,7 +54,7 @@ const Guides = () => {
       category: "Coins",
       difficulty: "Intermediate",
       estimatedValue: "$15-800",
-      image: "https://images.unsplash.com/photo-1642543492481-44e81e3914a7?w=300&h=200&fit=crop&q=80"
+      image: "https://images.unsplash.com/photo-1544378730-6edb7b5a1cd3?w=300&h=200&fit=crop&q=80"
     },
     {
       id: 6,
@@ -63,7 +63,7 @@ const Guides = () => {
       category: "Currency",
       difficulty: "Beginner",
       estimatedValue: "$20-150",
-      image: "https://images.unsplash.com/photo-1614027164847-1b28cfe1df60?w=300&h=200&fit=crop&q=80"
+      image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=300&h=200&fit=crop&q=80"
     }
   ];
 
