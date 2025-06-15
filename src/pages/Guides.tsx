@@ -1,11 +1,15 @@
 
-import { BookOpen, DollarSign, Search } from 'lucide-react';
+import { BookOpen, DollarSign, Search, ExternalLink } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import Header from '@/components/Header';
 import MobileNavigation from '@/components/MobileNavigation';
+import { useToast } from '@/hooks/use-toast';
 
 const Guides = () => {
+  const { toast } = useToast();
+
   const guides = [
     {
       id: 1,
@@ -14,7 +18,7 @@ const Guides = () => {
       category: "Coins",
       difficulty: "Beginner",
       estimatedValue: "$10-500",
-      image: "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=300&h=200&fit=crop"
+      image: "https://images.unsplash.com/photo-1621416894569-0f39ed31d247?w=300&h=200&fit=crop&q=80"
     },
     {
       id: 2,
@@ -23,7 +27,7 @@ const Guides = () => {
       category: "Coins",
       difficulty: "Intermediate",
       estimatedValue: "$50-2000",
-      image: "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=300&h=200&fit=crop"
+      image: "https://images.unsplash.com/photo-1640826387934-6d1369d93ccd?w=300&h=200&fit=crop&q=80"
     },
     {
       id: 3,
@@ -32,7 +36,7 @@ const Guides = () => {
       category: "Currency",
       difficulty: "Beginner",
       estimatedValue: "$25-300",
-      image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=300&h=200&fit=crop"
+      image: "https://images.unsplash.com/photo-1633158829585-23ba8f7c8caf?w=300&h=200&fit=crop&q=80"
     },
     {
       id: 4,
@@ -41,7 +45,7 @@ const Guides = () => {
       category: "Currency",
       difficulty: "Advanced",
       estimatedValue: "$100-5000",
-      image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=300&h=200&fit=crop"
+      image: "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=300&h=200&fit=crop&q=80"
     },
     {
       id: 5,
@@ -50,7 +54,7 @@ const Guides = () => {
       category: "Coins",
       difficulty: "Intermediate",
       estimatedValue: "$15-800",
-      image: "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=300&h=200&fit=crop"
+      image: "https://images.unsplash.com/photo-1642543492481-44e81e3914a7?w=300&h=200&fit=crop&q=80"
     },
     {
       id: 6,
@@ -59,23 +63,30 @@ const Guides = () => {
       category: "Currency",
       difficulty: "Beginner",
       estimatedValue: "$20-150",
-      image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=300&h=200&fit=crop"
+      image: "https://images.unsplash.com/photo-1614027164847-1b28cfe1df60?w=300&h=200&fit=crop&q=80"
     }
   ];
 
+  const handleGuideClick = (guide: any) => {
+    toast({
+      title: `Opening ${guide.title}`,
+      description: "Guide content will be available soon. This feature is coming in the next update!",
+    });
+  };
+
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
-      case 'Beginner': return 'bg-green-100 text-green-800';
-      case 'Intermediate': return 'bg-yellow-100 text-yellow-800';
-      case 'Advanced': return 'bg-red-100 text-red-800';
+      case 'Beginner': return 'bg-green-100 text-green-800 hover:bg-green-200';
+      case 'Intermediate': return 'bg-yellow-100 text-yellow-800 hover:bg-yellow-200';
+      case 'Advanced': return 'bg-red-100 text-red-800 hover:bg-red-200';
       default: return 'bg-gray-100 text-gray-800';
     }
   };
 
   const getCategoryColor = (category: string) => {
     return category === 'Coins' 
-      ? 'bg-brand-blue-100 text-brand-blue-800'
-      : 'bg-brand-gold-100 text-brand-gold-800';
+      ? 'bg-brand-blue-100 text-brand-blue-800 hover:bg-brand-blue-200'
+      : 'bg-brand-gold-100 text-brand-gold-800 hover:bg-brand-gold-200';
   };
 
   return (
@@ -102,8 +113,8 @@ const Guides = () => {
                   <span>Search coming soon - Browse our curated guides below</span>
                 </div>
                 <div className="flex space-x-2">
-                  <Badge variant="outline">All Categories</Badge>
-                  <Badge variant="outline">All Levels</Badge>
+                  <Badge variant="outline" className="cursor-pointer hover:bg-gray-100">All Categories</Badge>
+                  <Badge variant="outline" className="cursor-pointer hover:bg-gray-100">All Levels</Badge>
                 </div>
               </div>
             </CardContent>
@@ -113,7 +124,11 @@ const Guides = () => {
         {/* Guides Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {guides.map((guide) => (
-            <Card key={guide.id} className="group cursor-pointer hover:shadow-xl transition-all duration-200 hover:scale-105">
+            <Card 
+              key={guide.id} 
+              className="group cursor-pointer hover:shadow-xl transition-all duration-200 hover:scale-105"
+              onClick={() => handleGuideClick(guide)}
+            >
               <div className="aspect-video overflow-hidden rounded-t-lg">
                 <img 
                   src={guide.image} 
@@ -139,9 +154,10 @@ const Guides = () => {
                     <DollarSign size={16} />
                     <span className="text-sm font-medium">{guide.estimatedValue}</span>
                   </div>
-                  <div className="flex items-center space-x-1 text-brand-blue-600">
+                  <div className="flex items-center space-x-1 text-brand-blue-600 group-hover:text-brand-blue-700">
                     <BookOpen size={16} />
                     <span className="text-sm">Read Guide</span>
+                    <ExternalLink size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />
                   </div>
                 </div>
               </CardContent>
@@ -155,15 +171,25 @@ const Guides = () => {
             <CardContent className="p-8">
               <BookOpen className="w-16 h-16 text-brand-blue-600 mx-auto mb-4" />
               <h3 className="text-xl font-bold text-gray-900 mb-2">More Guides Coming Soon</h3>
-              <p className="text-gray-600 mb-4">
+              <p className="text-gray-600 mb-6">
                 We're continuously adding new guides to help you become an expert error detector
               </p>
-              <div className="grid sm:grid-cols-2 gap-4 text-sm text-gray-600">
+              <div className="grid sm:grid-cols-2 gap-4 text-sm text-gray-600 mb-6">
                 <div>• Advanced grading techniques</div>
                 <div>• Authentication methods</div>
                 <div>• Market value analysis</div>
                 <div>• Rare error varieties</div>
               </div>
+              <Button 
+                variant="outline" 
+                className="hover:bg-brand-blue-50"
+                onClick={() => toast({
+                  title: "Coming Soon!",
+                  description: "We'll notify you when new guides are available."
+                })}
+              >
+                Get Notified
+              </Button>
             </CardContent>
           </Card>
         </div>
