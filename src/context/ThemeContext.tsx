@@ -29,21 +29,23 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   }, []);
 
   useEffect(() => {
-    const root = document.documentElement;
+    const html = document.documentElement;
     const body = document.body;
     
     console.log('Applying theme changes:', { isDarkMode, isBlueFilterEnabled });
     
+    // Apply dark mode class to html element (this is what Tailwind CSS expects)
     if (isDarkMode) {
-      root.classList.add('dark');
+      html.classList.add('dark');
       localStorage.setItem('theme', 'dark');
       console.log('Dark mode enabled');
     } else {
-      root.classList.remove('dark');
+      html.classList.remove('dark');
       localStorage.setItem('theme', 'light');
       console.log('Light mode enabled');
     }
 
+    // Apply blue light filter to body element
     if (isBlueFilterEnabled) {
       body.classList.add('blue-light-filter');
       localStorage.setItem('blue-filter', 'true');
