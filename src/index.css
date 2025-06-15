@@ -7,23 +7,23 @@
 
 @layer base {
   :root {
-    --background: 250 248 240;
+    --background: 45 38 28;
     --foreground: 62 39 35;
 
-    --card: 255 253 250;
-    --card-foreground: 62 39 35;
+    --card: 50 43 33;
+    --card-foreground: 245 240 230;
 
-    --popover: 255 253 250;
-    --popover-foreground: 62 39 35;
+    --popover: 50 43 33;
+    --popover-foreground: 245 240 230;
 
     --primary: 120 53 15;
     --primary-foreground: 255 253 250;
 
-    --secondary: 245 240 230;
-    --secondary-foreground: 92 69 49;
+    --secondary: 60 50 40;
+    --secondary-foreground: 245 240 230;
 
-    --muted: 245 240 230;
-    --muted-foreground: 133 110 80;
+    --muted: 60 50 40;
+    --muted-foreground: 180 155 130;
 
     --accent: 180 83 9;
     --accent-foreground: 255 253 250;
@@ -31,59 +31,41 @@
     --destructive: 239 68 68;
     --destructive-foreground: 255 253 250;
 
-    --border: 230 220 200;
-    --input: 230 220 200;
+    --border: 80 68 55;
+    --input: 80 68 55;
     --ring: 180 83 9;
 
     --radius: 0.75rem;
-
-    --sidebar-background: 255 253 250;
-    --sidebar-foreground: 62 39 35;
-    --sidebar-primary: 120 53 15;
-    --sidebar-primary-foreground: 255 253 250;
-    --sidebar-accent: 245 240 230;
-    --sidebar-accent-foreground: 92 69 49;
-    --sidebar-border: 230 220 200;
-    --sidebar-ring: 180 83 9;
   }
 
   .dark {
-    --background: 41 30 21;
-    --foreground: 255 253 250;
+    --background: 30 25 18;
+    --foreground: 245 240 230;
 
-    --card: 62 45 30;
-    --card-foreground: 255 253 250;
+    --card: 40 32 22;
+    --card-foreground: 245 240 230;
 
-    --popover: 62 45 30;
-    --popover-foreground: 255 253 250;
+    --popover: 40 32 22;
+    --popover-foreground: 245 240 230;
 
     --primary: 234 179 8;
-    --primary-foreground: 41 30 21;
+    --primary-foreground: 30 25 18;
 
-    --secondary: 92 69 49;
-    --secondary-foreground: 230 220 200;
+    --secondary: 50 40 28;
+    --secondary-foreground: 200 185 160;
 
-    --muted: 92 69 49;
-    --muted-foreground: 180 155 130;
+    --muted: 50 40 28;
+    --muted-foreground: 160 140 115;
 
     --accent: 234 179 8;
-    --accent-foreground: 41 30 21;
+    --accent-foreground: 30 25 18;
 
     --destructive: 239 68 68;
-    --destructive-foreground: 255 253 250;
+    --destructive-foreground: 245 240 230;
 
-    --border: 92 69 49;
-    --input: 92 69 49;
+    --border: 60 48 35;
+    --input: 60 48 35;
     --ring: 234 179 8;
-
-    --sidebar-background: 62 45 30;
-    --sidebar-foreground: 255 253 250;
-    --sidebar-primary: 234 179 8;
-    --sidebar-primary-foreground: 41 30 21;
-    --sidebar-accent: 92 69 49;
-    --sidebar-accent-foreground: 230 220 200;
-    --sidebar-border: 92 69 49;
-    --sidebar-ring: 234 179 8;
   }
 }
 
@@ -96,6 +78,15 @@
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
     transition: background-color 0.3s ease, color 0.3s ease, filter 0.3s ease;
+  }
+
+  /* Ensure html and root also get the background */
+  html {
+    @apply bg-background;
+  }
+
+  #root {
+    @apply bg-background min-h-screen;
   }
 
   /* Blue light filter styles applied directly to body */
@@ -114,11 +105,11 @@
 }
 
 .gradient-card {
-  background: linear-gradient(135deg, #fefdfb 0%, #faf8f0 100%);
+  background: linear-gradient(135deg, rgb(50 43 33) 0%, rgb(60 50 40) 100%);
 }
 
 .dark .gradient-card {
-  background: linear-gradient(135deg, #3e2d1e 0%, #5c4530 100%);
+  background: linear-gradient(135deg, rgb(40 32 22) 0%, rgb(50 40 28) 100%);
 }
 
 /* Mobile-first touch targets */
