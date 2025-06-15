@@ -21,13 +21,13 @@ const Index = () => {
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="text-center space-y-8 animate-fade-in">
             <div className="space-y-4">
-              <h1 className="text-4xl md:text-6xl font-bold text-gray-900">
+              <h1 className="text-4xl md:text-6xl font-bold text-foreground">
                 Discover Hidden
                 <span className="bg-gradient-to-r from-brand-blue-600 to-brand-gold-500 bg-clip-text text-transparent">
                   {" "}Treasures
                 </span>
               </h1>
-              <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
                 AI-powered detection for valuable errors on coins and paper money. 
                 Turn your collection into profit with expert analysis.
               </p>
@@ -52,13 +52,13 @@ const Index = () => {
             <div className="grid md:grid-cols-3 gap-6 mt-16">
               <Card className="gradient-card border-0 shadow-lg hover:shadow-xl transition-shadow">
                 <CardHeader className="text-center">
-                  <div className="w-16 h-16 bg-brand-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <div className="w-16 h-16 bg-brand-blue-100 dark:bg-brand-blue-900/20 rounded-full flex items-center justify-center mx-auto mb-4">
                     <Camera className="w-8 h-8 text-brand-blue-600" />
                   </div>
                   <CardTitle>AI-Powered Detection</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-gray-600 text-center">
+                  <p className="text-muted-foreground text-center">
                     Upload photos and get instant analysis of potential errors with confidence ratings
                   </p>
                 </CardContent>
@@ -66,13 +66,13 @@ const Index = () => {
 
               <Card className="gradient-card border-0 shadow-lg hover:shadow-xl transition-shadow">
                 <CardHeader className="text-center">
-                  <div className="w-16 h-16 bg-brand-gold-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <div className="w-16 h-16 bg-brand-gold-100 dark:bg-brand-gold-900/20 rounded-full flex items-center justify-center mx-auto mb-4">
                     <Crown className="w-8 h-8 text-brand-gold-600" />
                   </div>
                   <CardTitle>Value Estimation</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-gray-600 text-center">
+                  <p className="text-muted-foreground text-center">
                     Get estimated market values based on current collector demand and rarity
                   </p>
                 </CardContent>
@@ -80,13 +80,13 @@ const Index = () => {
 
               <Card className="gradient-card border-0 shadow-lg hover:shadow-xl transition-shadow">
                 <CardHeader className="text-center">
-                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <div className="w-16 h-16 bg-green-100 dark:bg-green-900/20 rounded-full flex items-center justify-center mx-auto mb-4">
                     <BookOpen className="w-8 h-8 text-green-600" />
                   </div>
                   <CardTitle>Expert Guides</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-gray-600 text-center">
+                  <p className="text-muted-foreground text-center">
                     Learn from comprehensive guides on grading, authentication, and error types
                   </p>
                 </CardContent>
@@ -107,10 +107,10 @@ const Index = () => {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Welcome Section */}
         <div className="mb-8 animate-fade-in">
-          <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
+          <h1 className="text-2xl md:text-3xl font-bold text-foreground mb-2">
             Welcome back, {user.username || user.email}!
           </h1>
-          <p className="text-gray-600">
+          <p className="text-muted-foreground">
             Ready to discover valuable errors in your collection?
           </p>
         </div>
@@ -121,10 +121,10 @@ const Index = () => {
             <CardContent className="p-6">
               <div className="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0">
                 <div>
-                  <h2 className="text-xl font-semibold text-gray-900 mb-2">
+                  <h2 className="text-xl font-semibold text-foreground mb-2">
                     Start Your Next Scan
                   </h2>
-                  <p className="text-gray-600">
+                  <p className="text-muted-foreground">
                     Upload a photo of your coin or currency to detect valuable errors
                   </p>
                 </div>
@@ -200,14 +200,14 @@ const Index = () => {
               <CardContent className="space-y-3">
                 <Link 
                   to="/guides" 
-                  className="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                  className="flex items-center space-x-3 p-3 rounded-lg hover:bg-muted transition-colors"
                 >
                   <BookOpen className="w-5 h-5 text-brand-blue-600" />
                   <span>Error Detection Guides</span>
                 </Link>
                 <Link 
                   to="/account" 
-                  className="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                  className="flex items-center space-x-3 p-3 rounded-lg hover:bg-muted transition-colors"
                 >
                   <Crown className="w-5 h-5 text-brand-gold-600" />
                   <span>Account Settings</span>
